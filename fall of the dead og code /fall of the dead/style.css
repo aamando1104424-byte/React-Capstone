@@ -1,0 +1,1544 @@
+/* Palette
+   One set of colours per rank, from ash black at rank 1 to white gold at rank 10.
+   ui.js sets <body data-rank="3">; every rule below works from these variables,
+   so a rank up repaints the whole page without touching a single element. */
+body {
+    --bg: #0b0a09;
+    --panel: #171513;
+    --ink: #d9d1c5;
+    --muted: #9d9387;
+    --accent: #b9a88f;
+    --danger: #db665c;
+    --btn: #2a2622;
+    --btn-ink: #d9d1c5;
+    --glow: 0 0 0 transparent;
+
+    /* Battle log colours, bright while the page is still dark at ranks 1 to 5. */
+    --fire: #ffa07a;
+    --rot: #a6dc7c;
+    --frost: #96d4ff;
+    --shadow: #d4b8ff;
+    --blood: #ff9494;
+    --steel: #cdd6e0;
+    --holy: #ffd97a;
+    --heal: #78e6c2;
+    --crit: #ffbb5c;
+
+    /* Mixed from the colours above so borders follow the rank as well. */
+    --line: color-mix(in srgb, var(--ink) 18%, var(--panel));
+    --frame: color-mix(in srgb, var(--ink) 40%, var(--panel));
+    --soft: color-mix(in srgb, var(--ink) 7%, var(--panel));
+    --c: var(--accent);
+}
+
+body[data-rank="2"] {
+    --bg: #100e0c;
+    --panel: #1c1916;
+    --ink: #ddd4c7;
+    --muted: #a3988b;
+    --accent: #c4a883;
+    --danger: #de6a5d;
+    --btn: #302a25;
+    --btn-ink: #ddd4c7;
+}
+
+body[data-rank="3"] {
+    --bg: #17130f;
+    --panel: #241f1a;
+    --ink: #e2d8c8;
+    --muted: #aa9d8d;
+    --accent: #cda876;
+    --danger: #e2705f;
+    --btn: #3a322a;
+    --btn-ink: #e2d8c8;
+}
+
+body[data-rank="4"] {
+    --bg: #201a14;
+    --panel: #2e271f;
+    --ink: #e7ddcc;
+    --muted: #b3a591;
+    --accent: #d6aa66;
+    --danger: #e87a66;
+    --btn: #463b30;
+    --btn-ink: #e7ddcc;
+}
+
+/* Knight: stone and candlelight. */
+body[data-rank="5"] {
+    --bg: #2d251d;
+    --panel: #3c3329;
+    --ink: #efe5d3;
+    --muted: #c0b19b;
+    --accent: #e3b55e;
+    --danger: #f39580;
+    --btn: #574a3b;
+    --btn-ink: #efe5d3;
+}
+
+/* From here the light is back, so the page flips to dark text on pale panels. */
+body[data-rank="6"] {
+    --bg: #b8af9a;
+    --panel: #d7cfbb;
+    --ink: #1f1b15;
+    --muted: #3f392e;
+    --accent: #5e4510;
+    --danger: #86200f;
+    --btn: #1f1b15;
+    --btn-ink: #d7cfbb;
+    --fire: #8a2e05;
+    --rot: #2d5412;
+    --frost: #134874;
+    --shadow: #57307f;
+    --blood: #861414;
+    --steel: #34414f;
+    --holy: #5f4300;
+    --heal: #07573f;
+    --crit: #723f00;
+}
+
+body[data-rank="7"] {
+    --bg: #cfcbb6;
+    --panel: #ddd9c6;
+    --ink: #23241c;
+    --muted: #4a4a3c;
+    --accent: #5c4712;
+    --danger: #7d1f16;
+    --btn: #23241c;
+    --btn-ink: #ddd9c6;
+    --fire: #8a2e05;
+    --rot: #2d5412;
+    --frost: #134874;
+    --shadow: #57307f;
+    --blood: #861414;
+    --steel: #34414f;
+    --holy: #5f4300;
+    --heal: #07573f;
+    --crit: #723f00;
+}
+
+body[data-rank="8"] {
+    --bg: #ddd6c1;
+    --panel: #ebe5d4;
+    --ink: #221e16;
+    --muted: #4d4638;
+    --accent: #654c0e;
+    --danger: #7d1f16;
+    --btn: #221e16;
+    --btn-ink: #ebe5d4;
+    --fire: #8a2e05;
+    --rot: #2d5412;
+    --frost: #134874;
+    --shadow: #57307f;
+    --blood: #861414;
+    --steel: #34414f;
+    --holy: #5f4300;
+    --heal: #07573f;
+    --crit: #723f00;
+}
+
+body[data-rank="9"] {
+    --bg: #ece4cd;
+    --panel: #f6f0df;
+    --ink: #231d12;
+    --muted: #51483a;
+    --accent: #6d510b;
+    --danger: #7a1d14;
+    --btn: #231d12;
+    --btn-ink: #f6f0df;
+    --glow: 0 0 22px rgba(226, 179, 64, 0.3);
+    --fire: #8a2e05;
+    --rot: #2d5412;
+    --frost: #134874;
+    --shadow: #57307f;
+    --blood: #861414;
+    --steel: #34414f;
+    --holy: #5f4300;
+    --heal: #07573f;
+    --crit: #723f00;
+}
+
+/* Saint: white and gold, everything glows. */
+body[data-rank="10"] {
+    --bg: #fbf5e2;
+    --panel: #fffcf2;
+    --ink: #241d10;
+    --muted: #54493a;
+    --accent: #765806;
+    --danger: #7a1d14;
+    --btn: #241d10;
+    --btn-ink: #fffcf2;
+    --glow: 0 0 0 1px #e6c56b, 0 0 36px rgba(226, 179, 64, 0.5);
+    --fire: #8a2e05;
+    --rot: #2d5412;
+    --frost: #134874;
+    --shadow: #57307f;
+    --blood: #861414;
+    --steel: #34414f;
+    --holy: #5f4300;
+    --heal: #07573f;
+    --crit: #723f00;
+}
+
+/* ---------- Page ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--ink);
+    text-align: center;
+    margin: 0;
+    padding: 24px 16px 40px;
+    transition: background-color 1.5s ease, color 1.5s ease;
+}
+
+/* Keeps [hidden] hidden even where a display value is set. */
+[hidden] {
+    display: none !important;
+}
+
+/* The ash drifting behind everything. */
+#embers {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+.prologue,
+#game {
+    position: relative;
+    z-index: 1;
+}
+
+/* Screen flash for big hits and rank ups. */
+#flash {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+}
+
+#flash.red {
+    animation: flash-red 0.5s ease-out;
+}
+
+#flash.gold {
+    animation: flash-gold 1.1s ease-out;
+}
+
+/* ---------- Headings ---------- */
+
+h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 4px;
+    color: var(--accent);
+    transition: color 1.5s ease, text-shadow 1.5s ease;
+}
+
+body[data-rank="10"] h1 {
+    text-shadow: 0 0 20px rgba(226, 179, 64, 0.6);
+}
+
+.subtitle {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 0 18px;
+    color: var(--muted);
+}
+
+/* ---------- Prologue ---------- */
+
+.prologue {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 10vh 8px 40px;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.prologue h1 {
+    margin-bottom: 36px;
+}
+
+.prologue p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 0 0 18px;
+    color: var(--ink);
+}
+
+.prologue p.last {
+    margin-top: 32px;
+    font-size: 24px;
+    font-style: italic;
+    color: var(--danger);
+}
+
+.prologue button {
+    display: inline-block;
+    width: auto;
+    margin-top: 28px;
+    padding: 14px 44px;
+    font-size: 16px;
+}
+
+.prologue h1,
+.prologue p,
+.prologue button {
+    opacity: 0;
+    animation: rise 1.2s ease forwards;
+}
+
+.prologue p:nth-of-type(1) { animation-delay: 0.8s; }
+.prologue p:nth-of-type(2) { animation-delay: 2s; }
+.prologue p:nth-of-type(3) { animation-delay: 3.2s; }
+.prologue p:nth-of-type(4) { animation-delay: 4.6s; }
+.prologue p:nth-of-type(5) { animation-delay: 6.2s; }
+.prologue button { animation-delay: 7.2s; }
+
+/* ---------- Game layout ----------
+   Phones get one column: header, enemy, log, then Aldric, so the last thing
+   that happened is always directly above the buttons. The wider layouts are at
+   the bottom of this file. */
+#game {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+        "header"
+        "enemy"
+        "log"
+        "hero"
+        "board";
+    gap: 16px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.game-header { grid-area: header; }
+#userBox { grid-area: hero; }
+#zombieBox { grid-area: enemy; }
+.log-panel { grid-area: log; }
+.board { grid-area: board; }
+
+/* ---------- Rank ladder ---------- */
+
+.ladder {
+    max-width: 560px;
+    margin: 0 auto 14px;
+}
+
+.ladder-label {
+    margin: 0 0 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.ladder-track {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--muted);
+}
+
+.steps {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+    background: linear-gradient(var(--frame), var(--frame)) center / 100% 2px no-repeat;
+}
+
+.step {
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--frame);
+    border-radius: 50%;
+    background-color: var(--bg);
+    transition: background-color 1.5s ease, border-color 1.5s ease, box-shadow 1.5s ease;
+}
+
+.step.done {
+    border-color: var(--accent);
+    background-color: var(--accent);
+}
+
+.step.current {
+    width: 16px;
+    height: 16px;
+    border-color: var(--accent);
+    background-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--bg), 0 0 14px var(--accent);
+}
+
+/* The three header buttons stay in one row at every size. */
+.select {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.select button {
+    width: auto;
+    margin-top: 0;
+    padding: 9px 16px;
+    font-size: 13px;
+}
+
+/* ---------- Panels ---------- */
+
+.box,
+.log-panel,
+.board {
+    position: relative;
+    text-align: left;
+    background-color: color-mix(in srgb, var(--panel) 92%, transparent);
+    border: 1px solid var(--frame);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28), var(--glow);
+    backdrop-filter: blur(8px);
+    transition: background-color 1.5s ease, border-color 1.5s ease, box-shadow 1.5s ease;
+    overflow: hidden;
+}
+
+.box {
+    padding: 16px 18px 18px;
+}
+
+.card-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 0 0 2px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.box h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 26px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+#userBox h2 {
+    color: var(--accent);
+}
+
+#zombieBox h2 {
+    color: var(--danger);
+}
+
+.who {
+    margin: 2px 0 12px;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--muted);
+}
+
+.box p {
+    font-size: 13px;
+    margin: 3px 0;
+    color: var(--muted);
+}
+
+.box p span {
+    font-weight: 700;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Life bars */
+
+.meter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.bar {
+    position: relative;
+    height: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background-color: color-mix(in srgb, var(--ink) 14%, var(--panel));
+    overflow: hidden;
+}
+
+.bar-lag,
+.bar-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 100%;
+    border-radius: 6px;
+}
+
+/* The pale chunk drains a moment behind the bar, so you can see what a hit took. */
+.bar-lag {
+    background-color: color-mix(in srgb, var(--ink) 45%, var(--panel));
+    transition: width 0.7s ease 0.25s;
+}
+
+.hero-bar .bar-fill {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--heal) 70%, var(--panel)), var(--heal));
+    transition: width 0.25s ease;
+}
+
+.enemy-bar .bar-fill {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--danger) 70%, var(--panel)), var(--danger));
+    transition: width 0.25s ease;
+}
+
+/* Faith pips */
+
+.pips {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.pip {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--holy) 45%, var(--panel));
+    background-color: transparent;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pip.on {
+    background-color: var(--holy);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--holy) 60%, transparent);
+}
+
+/* Stats */
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 14px;
+    margin-top: 6px;
+}
+
+.stats .wide {
+    grid-column: 1 / -1;
+}
+
+.traits {
+    margin: 6px 0 0;
+    line-height: 2;
+}
+
+.intent {
+    margin: 10px 0 0;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--danger);
+    border: 1px solid color-mix(in srgb, var(--danger) 50%, var(--panel));
+    border-radius: 8px;
+    background-color: color-mix(in srgb, var(--danger) 12%, var(--panel));
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+/* Blessings */
+
+.blessings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.chip {
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--holy);
+    border: 1px solid color-mix(in srgb, var(--holy) 40%, var(--panel));
+    border-radius: 999px;
+    background-color: color-mix(in srgb, var(--holy) 10%, var(--panel));
+    cursor: help;
+}
+
+/* ---------- Buttons ---------- */
+
+button {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 11px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--btn-ink);
+    background-color: var(--btn);
+    border: 1px solid var(--frame);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s, transform 0.08s, box-shadow 0.15s;
+}
+
+button:hover {
+    color: var(--panel);
+    background-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Dimmed, but you still have to be able to read what you cannot afford yet. */
+button:disabled,
+button:disabled:hover {
+    color: color-mix(in srgb, var(--ink) 60%, var(--panel));
+    background-color: var(--soft);
+    border-color: var(--line);
+    transform: none;
+    cursor: not-allowed;
+}
+
+/* Action buttons, two to a row. */
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.actions button {
+    margin-top: 0;
+    padding: 10px 8px;
+}
+
+/* The attack button changes name and shape with the weapon in his hand. */
+#attackBtn {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+#attackBtn[data-tier="5"],
+#attackBtn[data-tier="6"],
+#attackBtn[data-tier="7"],
+#attackBtn[data-tier="8"],
+#attackBtn[data-tier="9"] {
+    border-radius: 8px 8px 14px 14px;
+}
+
+#attackBtn[data-tier="10"] {
+    border-radius: 8px 8px 16px 16px;
+    color: var(--panel);
+    background: linear-gradient(160deg, var(--holy), color-mix(in srgb, var(--holy) 65%, var(--panel)));
+    border-color: var(--holy);
+}
+
+/* Skill buttons are angular and take the colour of what they do. */
+.skill-btn,
+.combo {
+    position: relative;
+    padding-left: 16px;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    border-color: color-mix(in srgb, var(--c) 45%, var(--panel));
+    background-color: color-mix(in srgb, var(--c) 12%, var(--btn));
+    /* btn-ink, not ink: these sit on the dark button colour at every rank, and
+       ink turns dark once the page goes light. */
+    color: var(--btn-ink);
+}
+
+.skill-btn:hover,
+.combo:hover {
+    color: var(--panel);
+    background-color: var(--c);
+}
+
+.combo {
+    --c: var(--crit);
+}
+
+/* Once he remembers the prayer, the combo button turns gold. */
+.combo.prayer {
+    --c: var(--holy);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--holy) 35%, transparent);
+}
+
+.cost {
+    display: inline-flex;
+    gap: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.cost .pip {
+    width: 7px;
+    height: 7px;
+    border-color: color-mix(in srgb, var(--c) 60%, var(--panel));
+    background-color: var(--c);
+    box-shadow: none;
+}
+
+button:disabled .cost .pip {
+    background-color: color-mix(in srgb, var(--ink) 45%, var(--panel));
+    border-color: transparent;
+}
+
+/* ---------- Battle log ---------- */
+
+.log-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 16px 6px;
+}
+
+.log-panel h2,
+.board h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    margin: 0 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--frame);
+    color: var(--ink);
+}
+
+.log {
+    height: 220px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.log p {
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line);
+    color: color-mix(in srgb, var(--ink) 85%, var(--panel));
+    animation: slide-in 0.3s ease-out;
+}
+
+.log p:last-child {
+    border-bottom: none;
+}
+
+.log .hero {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.log .foe {
+    font-weight: 700;
+    color: var(--danger);
+}
+
+.log .item {
+    font-weight: 700;
+    color: var(--holy);
+}
+
+/* The prayer, said between the hits of the combo. */
+.log p.speech {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--holy);
+    padding: 9px 0;
+}
+
+/* Rank ups are story beats, not stat lines. */
+.log p.rankup {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    color: var(--ink);
+    padding: 12px 0;
+}
+
+.log p.rankup strong,
+.log p.wave strong {
+    display: block;
+    margin-bottom: 3px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.log p.saint {
+    margin: 6px 0;
+    padding: 18px 12px;
+    font-size: 17px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: color-mix(in srgb, var(--accent) 14%, var(--panel));
+}
+
+/* A demon walking in. */
+.log p.wave {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ink);
+    padding: 11px 0;
+}
+
+.log p.wave strong {
+    color: var(--danger);
+    font-style: normal;
+}
+
+.log p.boss-line {
+    padding: 14px 12px;
+    border-radius: 10px;
+    background-color: color-mix(in srgb, var(--danger) 12%, var(--panel));
+}
+
+.log p.boss-line strong {
+    font-size: 13px;
+}
+
+/* The one turn of warning before a heavy blow. */
+.log p.warning {
+    font-weight: 700;
+    color: var(--danger);
+}
+
+.log p.big {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    animation: slide-in 0.3s ease-out, shake 0.5s ease-in-out 0.15s;
+}
+
+.log p.big .num {
+    font-size: 17px;
+}
+
+.log p.kill {
+    padding-left: 10px;
+    border-left: 3px solid var(--blood);
+    color: var(--ink);
+}
+
+.log p.kill .tag {
+    animation: pop 0.5s ease-out;
+}
+
+.log p.miss {
+    font-style: italic;
+    color: var(--muted);
+}
+
+.log p.ready {
+    font-weight: 700;
+    color: var(--holy);
+}
+
+.log p.verdict {
+    padding: 12px 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--danger);
+}
+
+/* ---------- Tags, numbers, floating damage ---------- */
+
+.fire { --c: var(--fire); }
+.rot { --c: var(--rot); }
+.frost { --c: var(--frost); }
+.shadow { --c: var(--shadow); }
+.blood, .kill { --c: var(--blood); }
+.steel, .block { --c: var(--steel); }
+.holy, .loot { --c: var(--holy); }
+.heal { --c: var(--heal); }
+.crit, .combo { --c: var(--crit); }
+.wave { --c: var(--danger); }
+.hurt { --c: var(--danger); }
+
+.tag {
+    display: inline-block;
+    padding: 1px 6px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    font-style: normal;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    vertical-align: 1px;
+    color: var(--c);
+    background-color: color-mix(in srgb, var(--c) 12%, var(--panel));
+    border: 1px solid color-mix(in srgb, var(--c) 40%, var(--panel));
+    border-radius: 4px;
+}
+
+.num {
+    display: inline-block;
+    font-weight: 800;
+    color: var(--c);
+    animation: pop 0.45s ease-out;
+}
+
+/* Numbers that fly off a card. */
+.float {
+    position: absolute;
+    top: 45%;
+    z-index: 2;
+    pointer-events: none;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--c);
+    text-shadow: 0 0 8px var(--panel), 0 1px 0 var(--panel);
+    animation: float-up 1s ease-out forwards;
+}
+
+.float.big {
+    font-size: 30px;
+}
+
+/* ---------- Leaderboard ---------- */
+
+.board {
+    padding: 14px 14px 16px;
+    container-type: inline-size;
+}
+
+.board form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: var(--soft);
+    border: 1px solid var(--line);
+}
+
+.board form p {
+    flex-basis: 100%;
+    margin: 0 0 4px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.board form p span {
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.board label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.board input {
+    flex: 1;
+    min-width: 120px;
+    padding: 9px 10px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    background-color: var(--panel);
+    border: 1px solid var(--frame);
+    border-radius: 8px;
+}
+
+.board input:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.board form button {
+    width: auto;
+    margin-top: 0;
+    padding: 10px 18px;
+}
+
+#saveMsg {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+#saveMsg:empty {
+    display: none;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.board table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.board th {
+    padding: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    white-space: nowrap;
+    color: var(--muted);
+    border-bottom: 1px solid var(--frame);
+}
+
+.board td {
+    padding: 8px 6px;
+    color: color-mix(in srgb, var(--ink) 85%, var(--panel));
+    border-bottom: 1px solid var(--line);
+}
+
+.board th:first-child,
+.board td:first-child,
+.board th:nth-child(n+4),
+.board td:nth-child(n+4) {
+    text-align: right;
+}
+
+.board td:first-child {
+    width: 1%;
+    color: var(--muted);
+}
+
+.board td:nth-child(2) {
+    min-width: 5em;
+    font-weight: 700;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+}
+
+.board tr.new td {
+    color: var(--ink);
+    background-color: color-mix(in srgb, var(--accent) 22%, var(--panel));
+}
+
+#boardEmpty {
+    margin: 4px 0 0;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--muted);
+}
+
+.hint {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--muted);
+    margin: 14px 0 0;
+}
+
+/* Drop the Kills column when the panel cannot fit every column: the table
+   needs 300px, and the panel's own scrollbar takes the rest. */
+@container (max-width: 319px) {
+    .board th:nth-child(5),
+    .board td:nth-child(5) {
+        display: none;
+    }
+}
+
+/* ---------- Rank up ceremony ---------- */
+
+.ceremony {
+    position: fixed;
+    inset: 0;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--holy) 18%, transparent), color-mix(in srgb, var(--bg) 85%, transparent) 60%);
+    opacity: 0;
+}
+
+.ceremony.playing {
+    animation: ceremony-fade 2.1s ease-out forwards;
+}
+
+.ceremony .beam {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    width: 42vmin;
+    height: 140vh;
+    transform: translateX(-50%) rotate(8deg);
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--holy) 55%, transparent), transparent 70%);
+    filter: blur(14px);
+    opacity: 0;
+}
+
+.ceremony.playing .beam {
+    animation: beam 2.1s ease-out forwards;
+}
+
+.ceremony-kicker {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--holy);
+}
+
+.ceremony-title {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(42px, 11vw, 96px);
+    line-height: 1;
+    color: var(--holy);
+    text-shadow: 0 0 40px color-mix(in srgb, var(--holy) 60%, transparent);
+}
+
+.ceremony-name {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--ink);
+}
+
+.ceremony.playing .ceremony-kicker,
+.ceremony.playing .ceremony-title,
+.ceremony.playing .ceremony-name {
+    animation: ceremony-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ceremony.playing .ceremony-title { animation-delay: 0.1s; }
+.ceremony.playing .ceremony-name { animation-delay: 0.25s; }
+
+/* ---------- Dialogs ---------- */
+
+dialog {
+    max-width: 620px;
+    width: calc(100% - 32px);
+    padding: 22px;
+    color: var(--ink);
+    background-color: var(--panel);
+    border: 1px solid var(--frame);
+    border-radius: 14px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), var(--glow);
+}
+
+dialog::backdrop {
+    background: rgba(8, 6, 4, 0.72);
+    backdrop-filter: blur(3px);
+}
+
+dialog h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    margin: 0 0 4px;
+    color: var(--accent);
+}
+
+.choice-kicker {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--holy);
+}
+
+.choice-sub {
+    margin: 0 0 16px;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--muted);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.choice-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+    text-align: left;
+    color: var(--ink);
+    background-color: color-mix(in srgb, var(--c) 10%, var(--panel));
+    border: 1px solid color-mix(in srgb, var(--c) 45%, var(--panel));
+    border-radius: 12px;
+    animation: card-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+#choice1 {
+    animation-delay: 0.1s;
+}
+
+.choice-card:hover {
+    color: var(--ink);
+    background-color: color-mix(in srgb, var(--c) 22%, var(--panel));
+    transform: translateY(-2px);
+}
+
+.card-kind {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c);
+}
+
+.card-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.card-text {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--ink) 85%, var(--panel));
+}
+
+.card-flavor {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+/* How to Play */
+
+#helpDialog {
+    max-width: 700px;
+    max-height: 82vh;
+}
+
+#helpBody {
+    max-height: 62vh;
+    overflow-y: auto;
+    padding-right: 6px;
+    text-align: left;
+}
+
+#helpBody h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    margin: 18px 0 6px;
+    color: var(--accent);
+}
+
+#helpBody p,
+#helpBody li {
+    font-size: 13px;
+    line-height: 1.6;
+    color: color-mix(in srgb, var(--ink) 88%, var(--panel));
+}
+
+#helpBody ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+#helpBody b {
+    color: var(--ink);
+}
+
+#helpDialog button {
+    width: auto;
+    margin: 16px auto 0;
+    padding: 10px 28px;
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes slide-in {
+    from { opacity: 0; transform: translateX(-12px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes pop {
+    0% { transform: scale(2); }
+    60% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: none; }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+}
+
+@keyframes pulse {
+    50% { opacity: 0.55; }
+}
+
+@keyframes float-up {
+    0% { opacity: 0; transform: translateY(6px) scale(0.6); }
+    25% { opacity: 1; transform: translateY(-6px) scale(1.1); }
+    100% { opacity: 0; transform: translateY(-52px) scale(1); }
+}
+
+@keyframes flash-red {
+    0% { opacity: 0; }
+    20% { opacity: 1; background: radial-gradient(circle at 50% 50%, transparent 35%, rgba(150, 10, 10, 0.55)); }
+    100% { opacity: 0; background: radial-gradient(circle at 50% 50%, transparent 35%, rgba(150, 10, 10, 0.55)); }
+}
+
+@keyframes flash-gold {
+    0% { opacity: 0; }
+    15% { opacity: 0.9; background: radial-gradient(circle at 50% 45%, rgba(255, 222, 150, 0.7), transparent 60%); }
+    100% { opacity: 0; background: radial-gradient(circle at 50% 45%, rgba(255, 222, 150, 0.7), transparent 60%); }
+}
+
+@keyframes ceremony-fade {
+    0% { opacity: 0; }
+    12% { opacity: 1; }
+    78% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes beam {
+    0% { opacity: 0; transform: translateX(-50%) rotate(8deg) scaleX(0.2); }
+    25% { opacity: 1; transform: translateX(-50%) rotate(8deg) scaleX(1); }
+    100% { opacity: 0; transform: translateX(-50%) rotate(8deg) scaleX(1.3); }
+}
+
+@keyframes ceremony-rise {
+    from { opacity: 0; transform: translateY(26px) scale(0.92); filter: blur(6px); }
+    to { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes card-in {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+}
+
+/* Cards shake when they are hit. */
+.box.hit {
+    animation: shake 0.35s ease-in-out;
+}
+
+.box.hit-big {
+    animation: shake 0.55s ease-in-out;
+}
+
+/* A crit holds everything still for a moment. */
+body.frozen *,
+body.frozen *::before {
+    animation-play-state: paused !important;
+}
+
+/* Anyone who has asked for less motion gets the game standing still. */
+@media (prefers-reduced-motion: reduce) {
+    .prologue h1,
+    .prologue p,
+    .prologue button,
+    .log p,
+    .log .num,
+    .log .tag,
+    .box.hit,
+    .box.hit-big,
+    .intent,
+    #flash.red,
+    #flash.gold {
+        opacity: 1;
+        animation: none !important;
+    }
+
+    .float {
+        animation: float-still 0.9s ease-out forwards;
+    }
+
+    .ceremony.playing,
+    .ceremony.playing .beam,
+    .ceremony.playing .ceremony-kicker,
+    .ceremony.playing .ceremony-title,
+    .ceremony.playing .ceremony-name {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+@keyframes float-still {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 640px) {
+    h1 {
+        font-size: 32px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .ladder-track {
+        gap: 8px;
+        font-size: 12px;
+    }
+
+    .prologue p {
+        font-size: 18px;
+    }
+}
+
+/* ---------- Bigger screens ----------
+   The whole game fits on one screen from here up. The log and the leaderboard
+   scroll inside their own panels so the page itself never does. */
+@media (min-width: 700px) and (min-height: 900px), (min-width: 1000px) {
+    body {
+        padding: 20px 16px;
+    }
+
+    #game {
+        gap: 20px;
+    }
+
+    .log-panel,
+    .board {
+        min-height: 0;
+    }
+
+    .log {
+        flex: 1;
+        height: auto;
+        min-height: 0;
+    }
+
+    .board {
+        overflow-y: auto;
+    }
+
+    .box {
+        align-self: start;
+    }
+}
+
+/* Tall tablets: Aldric and the demon side by side, log and board beneath. */
+@media (min-width: 700px) and (min-height: 900px) {
+    #game {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto minmax(0, 1fr);
+        grid-template-areas:
+            "header header"
+            "hero enemy"
+            "log board";
+        height: max(900px, calc(100vh - 40px));
+    }
+}
+
+/* Laptops: header on one line, log and board stacked down the right. */
+@media (min-width: 1000px) {
+    #game {
+        grid-template-columns: 320px 320px minmax(300px, 1fr);
+        grid-template-rows: auto minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-areas:
+            "header header header"
+            "hero enemy log"
+            "hero enemy board";
+        height: max(620px, calc(100vh - 40px));
+    }
+
+    .game-header {
+        display: grid;
+        grid-template-columns: auto minmax(240px, 1fr) auto;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .title-block {
+        text-align: left;
+    }
+
+    .game-header h1 {
+        font-size: 30px;
+    }
+
+    .subtitle {
+        margin: 2px 0 0;
+        font-size: 14px;
+    }
+
+    .ladder {
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto;
+    }
+
+    .select {
+        display: flex;
+        gap: 8px;
+    }
+
+    .select button {
+        width: auto;
+        margin-top: 0;
+        padding: 9px 16px;
+        font-size: 13px;
+    }
+}
+
+/* Big screens: log on the left, board on the right, the fight in the middle. */
+@media (min-width: 1340px) {
+    #game {
+        grid-template-columns: minmax(250px, 1fr) 320px 320px minmax(300px, 1.3fr);
+        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-areas:
+            "header header header header"
+            "log hero enemy board";
+        height: max(560px, calc(100vh - 40px));
+    }
+}

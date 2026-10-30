@@ -1,0 +1,23 @@
+Sound effects used in The Fall of the Dead
+
+Every sound here is CC0 (public domain): free to use, change and share,
+no credit required. Credit is given anyway.
+
+Kenney - "Impact Sounds" (www.kenney.nl)
+https://kenney.nl/assets/impact-sounds
+  impactBell_heavy_001.ogg, impactBell_heavy_004.ogg, impactGlass_light_002.ogg,
+  impactPlate_heavy_000.ogg, impactPunch_heavy_000.ogg, impactPunch_medium_000.ogg,
+  impactSoft_heavy_000.ogg, impactWood_heavy_000.ogg
+
+rubberduck - "80 CC0 RPG SFX" (OpenGameArt)
+https://opengameart.org/content/80-cc0-rpg-sfx
+  blade_01.ogg, blade_02.ogg, book_01.ogg, chain_03.ogg, creature_die_01.ogg,
+  creature_roar_03.ogg, spell_02.ogg, spell_fire_06.ogg
+
+rubberduck - "80 CC0 creature SFX" (OpenGameArt)
+https://opengameart.org/content/80-cc0-creature-sfx
+  alien_03.ogg, breath.ogg, cough_03.ogg, eat_02.ogg, howl.ogg, monster_01.ogg,
+  monster_06.ogg, monster_07.ogg, scream_01.ogg, troll_02.ogg, weird_02.ogg
+
+License: https://creativecommons.org/publicdomain/zero/1.0/
+<!-- style.css lays these four panels out differently at each screen size. -->
